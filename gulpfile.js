@@ -82,7 +82,7 @@ gulp.task('replace', function () {
 
 // disconnect any exisiting db connections  
 gulp.task('postgres_disconnect', function(){  
-  var con = 'postgres://postgres:password@localhost:5432/' + integrationTestDb;
+  var con = 'postgres://postgres:password@localhost:5432/postgres';
   var client = new pg.Client(con);
 
   async.series([

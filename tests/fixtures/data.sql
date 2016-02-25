@@ -19,13 +19,13 @@ CREATE SCHEMA hoth;
 ALTER SCHEMA hoth OWNER TO postgres;
 
 --
--- Name: topology; Type: SCHEMA; Schema: -; Owner: chris
+-- Name: topology; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
 CREATE SCHEMA topology;
 
 
-ALTER SCHEMA topology OWNER TO chris;
+ALTER SCHEMA topology OWNER TO postgres;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
@@ -6793,7 +6793,7 @@ SELECT pg_catalog.setval('socialaccount_socialtoken_id_seq', 1, false);
 
 
 --
--- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: chris
+-- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM stdin;
@@ -7983,7 +7983,7 @@ SELECT pg_catalog.setval('users_userprofile_id_seq', 6, true);
 SET search_path = topology, pg_catalog;
 
 --
--- Data for Name: topology; Type: TABLE DATA; Schema: topology; Owner: chris
+-- Data for Name: topology; Type: TABLE DATA; Schema: topology; Owner: postgres
 --
 
 COPY topology (id, name, srid, "precision", hasz) FROM stdin;
@@ -7991,7 +7991,7 @@ COPY topology (id, name, srid, "precision", hasz) FROM stdin;
 
 
 --
--- Data for Name: layer; Type: TABLE DATA; Schema: topology; Owner: chris
+-- Data for Name: layer; Type: TABLE DATA; Schema: topology; Owner: postgres
 --
 
 COPY layer (topology_id, layer_id, schema_name, table_name, feature_column, feature_type, level, child_id) FROM stdin;
@@ -12274,12 +12274,12 @@ ALTER TABLE ONLY users_userprofile
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: chris
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM chris;
-GRANT ALL ON SCHEMA public TO chris;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 

@@ -50,7 +50,7 @@ $ ionic platform add android
 Update Selenium webdriver for integration tests:
 
 ```bash
-$ webdriver-manager update
+$ ./node_modules/protractor/bin/webdriver-manager update
 ```
 
 Run Application
@@ -87,7 +87,7 @@ $ ionic serve
 Run protractor tets:
 
 ```bash
-$ protractor tests/conf_dev.js
+$ gulp protractor
 ```
 
 Setting Environment Variables
