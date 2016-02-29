@@ -737,7 +737,13 @@ CREATE TABLE partners_agreement (
     signed_by_partner_date date,
     partner_id integer NOT NULL,
     partner_manager_id integer,
-    signed_by_id integer
+    signed_by_id integer,
+    account_number character varying(50),
+    account_title character varying(255),
+    bank_address character varying(256) NOT NULL,
+    bank_contact_person character varying(255),
+    bank_name character varying(255),
+    routing_details character varying(255)
 );
 
 
@@ -4861,6 +4867,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 88	reports	0012_auto_20160222_1652	2016-02-23 10:44:09.974328-05
 89	sites	0002_alter_domain_unique	2016-02-23 10:44:10.508358-05
 90	users	0010_auto_20160216_1814	2016-02-23 10:44:15.982261-05
+91	partners	0022_auto_20160223_2222	2016-02-25 21:14:25.677795-05
 \.
 
 
@@ -4868,8 +4875,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: hoth; Owner: postgres
 --
 
-SELECT pg_catalog.setval('django_migrations_id_seq', 90, true);
-
+SELECT pg_catalog.setval('django_migrations_id_seq', 91, true);
 
 --
 -- Data for Name: funds_donor; Type: TABLE DATA; Schema: hoth; Owner: postgres
@@ -5010,7 +5016,7 @@ SELECT pg_catalog.setval('locations_region_id_seq', 1, false);
 -- Data for Name: partners_agreement; Type: TABLE DATA; Schema: hoth; Owner: postgres
 --
 
-COPY partners_agreement (id, created, modified, start, "end", agreement_type, agreement_number, attached_agreement, signed_by_unicef_date, signed_by_partner_date, partner_id, partner_manager_id, signed_by_id) FROM stdin;
+COPY partners_agreement (id, created, modified, start, "end", agreement_type, agreement_number, attached_agreement, signed_by_unicef_date, signed_by_partner_date, partner_id, partner_manager_id, signed_by_id, account_number, account_title, bank_address, bank_contact_person, bank_name, routing_details) FROM stdin;
 \.
 
 
@@ -5943,7 +5949,7 @@ COPY auth_user (id, password, last_login, is_superuser, username, first_name, la
 3	pbkdf2_sha256$20000$BwvYLpZCW0cD$v8brgatQrEEYnma9CP8m+6fohtQMw0zFcb0K3Wk/qbQ=	2016-02-15 10:03:00.183242-05	t	leia@force.com	leia		leia@force.com	t	t	2016-02-15 09:27:12-05
 6	pbkdf2_sha256$20000$Ort98H5Fvhah$LZA7OhRpLW9LX0TzGJp9ge+HyJi6K7Y9DIuPhSqgmyU=	\N	t	bb8@force.com	bb8		bb8@force.com	t	t	2016-02-15 10:37:06-05
 2	pbkdf2_sha256$20000$6MlpbG8f8UAz$3FJ8f+IfvQ8Sd+INDKZEBhKKP5a9t2VZBzyNqJloYuc=	2016-02-15 11:24:22.866018-05	t	han@force.com	han		han@force.com	t	t	2016-02-15 09:27:10-05
-4	pbkdf2_sha256$24000$VwisqqQ4GOZ8$QnBb8RGbYBC8NvQ9++2kYSheZ3X5zmR+/GjrwvWJ+OM=	2016-02-15 11:23:02.964325-05	t	rey@force.com	rey		rey@force.com	t	t	2016-02-15 09:27:14-05
+4	pbkdf2_sha256$24000$VwisqqQ4GOZ8$QnBb8RGbYBC8NvQ9++2kYSheZ3X5zmR+/GjrwvWJ+OM=	2016-02-25 09:52:23.659088-05	t	rey@force.com	rey		rey@force.com	t	t	2016-02-15 09:27:14-05
 \.
 
 
@@ -6288,6 +6294,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 88	reports	0012_auto_20160222_1652	2016-02-23 10:43:43.779917-05
 89	sites	0002_alter_domain_unique	2016-02-23 10:43:44.196252-05
 90	users	0010_auto_20160216_1814	2016-02-23 10:43:49.750313-05
+91	partners	0022_auto_20160223_2222	2016-02-25 21:14:24.428219-05
 \.
 
 
@@ -6295,8 +6302,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('django_migrations_id_seq', 90, true);
-
+SELECT pg_catalog.setval('django_migrations_id_seq', 91, true);
 
 --
 -- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -6307,6 +6313,7 @@ COPY django_session (session_key, session_data, expire_date) FROM stdin;
 u8lxo4e2m20kvl5bbvxf9zvruv6pehgp	NWRiYzhhZmFjZTMxYTBlM2ViZGVkZGQ1NDU5ZjJmNzgxYTFmMzg0MDp7Il9hdXRoX3VzZXJfaGFzaCI6IjlmMzA0YWI3ZTA3YTExZWMwMzljMTNiMDNiOTUxODgyZjI0ZTBhNWIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiI0In0=	2016-02-29 10:22:11.825055-05
 fi6yauvz57edo5e6lpr8sylmxm8uh665	YmE2OGY4NWJmNmQ2YTc3ZDQ3OWNkMTNhMjdiOGZlNmQyMWQzNmJhNDp7Il9hdXRoX3VzZXJfaGFzaCI6IjA1NGFkMzAxZDllZDI4MGFlMTBkMDQ5NzVkYzQ0NzgxM2M4YTJmZjEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=	2016-02-29 10:59:02.20368-05
 dp17ua786fw4yzqzjdzfc9bqbxltt1av	YmE2OGY4NWJmNmQ2YTc3ZDQ3OWNkMTNhMjdiOGZlNmQyMWQzNmJhNDp7Il9hdXRoX3VzZXJfaGFzaCI6IjA1NGFkMzAxZDllZDI4MGFlMTBkMDQ5NzVkYzQ0NzgxM2M4YTJmZjEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=	2016-02-29 11:24:22.873822-05
+hwyr69dfn5ii44j8bjn04zi5qjnglddo	MTY4YWU2MzY2YmZiYzc3OGI2M2E0NDhhYThiMTJhMTdiZGQ4ZGY1Mzp7Il9hdXRoX3VzZXJfaGFzaCI6IjNhZDRjNjlmZGNjNTNkZjMwYTcwYWIzN2MwYzVhZDU4MDk3M2Y5ZmMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiI0In0=	2016-03-10 09:52:23.663055-05
 \.
 
 
